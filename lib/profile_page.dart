@@ -21,16 +21,62 @@ class ProfilePage extends StatelessWidget {
           children: [
             const ProfileAvatar(),
             const SizedBox(height: 16),
-
             ProfileInfo(name: userName, role: role),
+            const SizedBox(height: 20),
+
+            OutlinedButton(onPressed: () {}, child: const Text('Edit Profil')),
+            const SizedBox(height: 24),
+
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      '12',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text('Proyek', style: TextStyle(color: Colors.grey)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      '1.2K',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text('Followers', style: TextStyle(color: Colors.grey)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      '350',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text('Following', style: TextStyle(color: Colors.grey)),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-// custome widget
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
