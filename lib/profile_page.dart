@@ -11,7 +11,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String userName = 'Given Keo';
   final String role = 'Mahasiswa Software Engineering';
 
-  // data dummy
+  // --- DATA DUMMY PENGALAMAN ---
   final List> experiences = const [
     {
       'title': 'Backend Developer Intern',
@@ -30,6 +30,42 @@ class _ProfilePageState extends State<ProfilePage> {
     },
   ];
 
+  void _showEditProfileDialog(BuildContext context) {
+    final TextEditingController nameController =
+        TextEditingController(text: userName);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Edit Profil'),
+          content: TextField(
+            controller: nameController,
+            decoration: const InputDecoration(
+              labelText: 'Nama Lengkap',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Batal'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  userName = nameController.text; // Update state nama
+                });
+                Navigator.pop(context);
+              },
+              child: const Text('Simpan'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,12 +82,13 @@ class _ProfilePageState extends State<ProfilePage> {
             const ProfileAvatar(),
             const SizedBox(height: 16),
             ProfileInfo(
-              name: userName, 
+              name: userName,
               role: role,
             ),
             const SizedBox(height: 20),
+            
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () => _showEditProfileDialog(context),
               child: const Text('Edit Profil'),
             ),
             const SizedBox(height: 24),
@@ -86,7 +123,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
