@@ -6,6 +6,7 @@ class ProfilePage extends StatelessWidget {
   final String userName = 'Given Keo';
   final String role = 'Mahasiswa Software Engineering';
 
+  // --- DATA DUMMY PENGALAMAN ---
   final List> experiences = const [
     {
       'title': 'Backend Developer Intern',
@@ -52,6 +53,7 @@ class ProfilePage extends StatelessWidget {
             const ProfileStats(),
             const SizedBox(height: 24),
             
+            // --- JUDUL SECTION PENGALAMAN ---
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -61,18 +63,16 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 12),
 
+            // --- LISTVIEW MENGGUNAKAN WIDGET EXPERIENCE CARD ---
             Expanded(
               child: ListView.builder(
                 itemCount: experiences.length,
                 itemBuilder: (context, index) {
                   final exp = experiences[index];
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    child: ListTile(
-                      leading: const Icon(Icons.work, color: Colors.blueAccent),
-                      title: Text(exp['title']!),
-                      subtitle: Text('${exp['company']} • ${exp['year']}'),
-                    ),
+                  return ExperienceCard(
+                    title: exp['title']!,
+                    company: exp['company']!,
+                    year: exp['year']!,
                   );
                 },
               ),
@@ -84,6 +84,7 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
+// ==================== CUSTOM WIDGETS ====================
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
@@ -168,6 +169,46 @@ class StatItem extends StatelessWidget {
           style: const TextStyle(color: Colors.grey),
         ),
       ],
+    );
+  }
+}
+
+/// Widget mandiri yang diekstrak untuk kartu pengalaman kerja
+class ExperienceCard extends StatelessWidget {
+  const ExperienceCard({
+    super.key,
+    required this.title,
+    required this.company,
+    required this.year,
+  });
+
+  final String title;
+  final String company;
+  final String year;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2, // Memberikan efek bayangan lembut
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: ListTile(
+          leading: const CircleAvatar(
+            backgroundColor: Colors.blueAccent,
+            child: Icon(Icons.work, color: Colors.white, size: 20),
+          ),
+          title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text('$company • $year'),
+          trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+        ),
+      ),
     );
   }
 }
