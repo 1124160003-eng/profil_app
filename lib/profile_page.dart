@@ -12,7 +12,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final String role = 'Mahasiswa Software Engineering';
 
   // --- DATA DUMMY PENGALAMAN ---
-  final List> experiences = const [
+  final List<Map<String, String>> experiences = const [
     {
       'title': 'Backend Developer Intern',
       'company': 'Tech Corp',
@@ -31,8 +31,9 @@ class _ProfilePageState extends State<ProfilePage> {
   ];
 
   void _showEditProfileDialog(BuildContext context) {
-    final TextEditingController nameController =
-        TextEditingController(text: userName);
+    final TextEditingController nameController = TextEditingController(
+      text: userName,
+    );
 
     showDialog(
       context: context,
@@ -54,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  userName = nameController.text; // Update state nama
+                  userName = nameController.text;
                 });
                 Navigator.pop(context);
               },
@@ -81,12 +82,8 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             const ProfileAvatar(),
             const SizedBox(height: 16),
-            ProfileInfo(
-              name: userName,
-              role: role,
-            ),
+            ProfileInfo(name: userName, role: role),
             const SizedBox(height: 20),
-            
             OutlinedButton(
               onPressed: () => _showEditProfileDialog(context),
               child: const Text('Edit Profil'),
@@ -94,7 +91,6 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 24),
             const ProfileStats(),
             const SizedBox(height: 24),
-            
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -103,7 +99,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 12),
-
             Expanded(
               child: ListView.builder(
                 itemCount: experiences.length,
@@ -138,11 +133,7 @@ class ProfileAvatar extends StatelessWidget {
 }
 
 class ProfileInfo extends StatelessWidget {
-  const ProfileInfo({
-    super.key,
-    required this.name,
-    required this.role,
-  });
+  const ProfileInfo({super.key, required this.name, required this.role});
 
   final String name;
   final String role;
@@ -184,11 +175,7 @@ class ProfileStats extends StatelessWidget {
 }
 
 class StatItem extends StatelessWidget {
-  const StatItem({
-    super.key,
-    required this.value,
-    required this.label,
-  });
+  const StatItem({super.key, required this.value, required this.label});
 
   final String value;
   final String label;
@@ -202,10 +189,7 @@ class StatItem extends StatelessWidget {
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 4),
-        Text(
-          label,
-          style: const TextStyle(color: Colors.grey),
-        ),
+        Text(label, style: const TextStyle(color: Colors.grey)),
       ],
     );
   }
@@ -228,9 +212,7 @@ class ExperienceCard extends StatelessWidget {
     return Card(
       elevation: 2,
       margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4),
         child: ListTile(
@@ -243,7 +225,11 @@ class ExperienceCard extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           subtitle: Text('$company • $year'),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+          trailing: const Icon(
+            Icons.arrow_forward_ios,
+            size: 14,
+            color: Colors.grey,
+          ),
         ),
       ),
     );

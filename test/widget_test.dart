@@ -1,30 +1,42 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:profil_app/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Profile page tampil dengan benar', (WidgetTester tester) async {
+    await tester.pumpWidget(const MainApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('Profil Pengguna'), findsOneWidget);
+    expect(find.text('Given Keo'), findsOneWidget);
+    expect(find.text('Mahasiswa Software Engineering'), findsOneWidget);
+    expect(find.text('Pengalaman'), findsOneWidget);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('Tombol Edit Profil membuka dialog', (WidgetTester tester) async {
+    await tester.pumpWidget(const MainApp());
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.tap(find.text('Edit Profil'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(TextField), findsOneWidget);
+    expect(find.text('Simpan'), findsOneWidget);
+    expect(find.text('Batal'), findsOneWidget);
+  });
+
+  testWidgets('Edit nama lalu simpan memperbarui UI', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MainApp());
+
+    await tester.tap(find.text('Edit Profil'));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'Nama Baru');
+    await tester.tap(find.text('Simpan'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Nama Baru'), findsOneWidget);
+    expect(find.text('Given Keo'), findsNothing);
   });
 }
