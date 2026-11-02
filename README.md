@@ -1,17 +1,33 @@
-# profil_app
+# Profil App (Flutter)
 
-A new Flutter project.
+Jadi ini project Flutter kecil-kecilan buat nampilin halaman profil (Profile Page).
+Isinya masih pakai data dummy, tapi udah lumayan interaktif karena namanya bisa di-edit.
 
-## Getting Started
+Ini urutan hal yang udah gw kerjain berdasarkan history commit:
 
-This project is a starting point for a Flutter application.
+### 1. Setup UI Dasar
 
-A few resources to get you started if this is your first Flutter project:
+- Bikin struktur awal halaman profil.
+- Nampilin foto profil (Avatar) sama teks nama dan role.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### 2. Rapihin Kode (Refactor)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Biar gak berantakan, kode gw pecah jadi beberapa custom widget terpisah (kayak `ProfileAvatar`, `ProfileInfo`, `ProfileStats`, sama `ExperienceCard`).
+- Mecah UI statistik jadi widget sendiri biar gampang diatur.
+
+### 3. Nambahin Fitur
+
+- Nambahin barisan statistik (jumlah proyek, followers, dll).
+- Bikin list riwayat pengalaman pakai `ListView.builder` biar bisa di-scroll.
+- Nambahin fitur **Edit Profil**. Karena butuh update data secara dinamis, gw ubah halaman ini dari `StatelessWidget` jadi `StatefulWidget`.
+- Bikin dialog (AlertDialog) buat ngedit nama, lengkap dengan tombol simpan dan batal.
+
+### 4. Finishing & Fix
+
+- Beresin error atau typo yang bikin kode merah.
+- Ngerapihin styling biar tampilannya lebih enak dilihat.
+
+---
+
+**Teknis:**
+Dibuat pakai Flutter. Udah nerapin State Management dasar (`setState`), Custom Widgets, sama Navigasi Dialog.
