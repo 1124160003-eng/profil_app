@@ -23,54 +23,10 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 16),
             ProfileInfo(name: userName, role: role),
             const SizedBox(height: 20),
-
             OutlinedButton(onPressed: () {}, child: const Text('Edit Profil')),
             const SizedBox(height: 24),
 
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      '12',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text('Proyek', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      '1.2K',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text('Followers', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      '350',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text('Following', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-              ],
-            ),
+            const ProfileStats(),
           ],
         ),
       ),
@@ -112,6 +68,43 @@ class ProfileInfo extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
         ),
+      ],
+    );
+  }
+}
+
+class ProfileStats extends StatelessWidget {
+  const ProfileStats({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        StatItem(value: '12', label: 'Proyek'),
+        StatItem(value: '1.2K', label: 'Followers'),
+        StatItem(value: '350', label: 'Following'),
+      ],
+    );
+  }
+}
+
+class StatItem extends StatelessWidget {
+  const StatItem({super.key, required this.value, required this.label});
+
+  final String value;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 4),
+        Text(label, style: const TextStyle(color: Colors.grey)),
       ],
     );
   }
