@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
-  final String userName = 'Given Keo';
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String userName = 'Given Keo';
   final String role = 'Mahasiswa Software Engineering';
 
-  // --- DATA DUMMY PENGALAMAN ---
+  // data dummy
   final List> experiences = const [
     {
       'title': 'Backend Developer Intern',
@@ -41,7 +46,7 @@ class ProfilePage extends StatelessWidget {
             const ProfileAvatar(),
             const SizedBox(height: 16),
             ProfileInfo(
-              name: userName,
+              name: userName, 
               role: role,
             ),
             const SizedBox(height: 20),
@@ -53,7 +58,6 @@ class ProfilePage extends StatelessWidget {
             const ProfileStats(),
             const SizedBox(height: 24),
             
-            // --- JUDUL SECTION PENGALAMAN ---
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -63,7 +67,6 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 12),
 
-            // --- LISTVIEW MENGGUNAKAN WIDGET EXPERIENCE CARD ---
             Expanded(
               child: ListView.builder(
                 itemCount: experiences.length,
@@ -84,7 +87,6 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-// ==================== CUSTOM WIDGETS ====================
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
@@ -173,7 +175,6 @@ class StatItem extends StatelessWidget {
   }
 }
 
-/// Widget mandiri yang diekstrak untuk kartu pengalaman kerja
 class ExperienceCard extends StatelessWidget {
   const ExperienceCard({
     super.key,
@@ -189,7 +190,7 @@ class ExperienceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2, // Memberikan efek bayangan lembut
+      elevation: 2,
       margin: const EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
